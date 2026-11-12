@@ -1,0 +1,56 @@
+OPENVINS IN ROS 2 HUMBLE: IMPLEMENTATION AND REPRODUCIBILITY
+One-page report template - complete after actual experiments
+
+Paper: Geneva, P., Eckenhoff, K., Lee, W., Yang, Y. and Huang, G. (2020).
+OpenVINS: A Research Platform for Visual-Inertial Estimation. IEEE ICRA.
+
+Method and learning. OpenVINS estimates motion by combining IMU measurements
+with visual-feature observations in an on-manifold Extended Kalman Filter.
+Its MSCKF formulation constrains a sliding window of cloned poses, while FEJ
+helps preserve estimator consistency. Camera intrinsics, extrinsics, and time
+offset can be calibrated online. During this implementation I learned
+[describe a specific estimation concept you investigated and how it affected
+your configuration or interpretation of the results].
+
+Implementation. I used the authors' existing ROS 2 implementation at revision
+69488123ed9362dd44b6f28e7f4680abbff1442b on [actual OS, ROS distribution, CPU,
+memory]. My work included [state which scripts/configuration/evaluation work
+you personally performed and understood]. The simulation used one camera at
+10 Hz, an IMU at 400 Hz, 11 pose clones, 100 feature tracks, and up to 50
+in-state landmarks. I disabled later IMU-intrinsic calibration extensions.
+I executed [number] independent seeds in [name scenarios] and retained their
+configuration, console output, and state logs.
+
+Results. Appendix A recreates Figure 3 using orientation and position errors
+with marginal +/-3-sigma bounds. [Give measured position and orientation RMSE,
+their units, and the relevant coverage/failure statistics.] Appendix B recreates
+Figure 4 using camera-IMU time-offset error during the first ten seconds.
+[Give initial/final or first-ten-second RMSE in seconds or milliseconds and
+describe the observed convergence.] Comparing [named cases] showed [describe
+the actual difference; avoid claiming the expected result before measuring].
+
+Technical lessons and limitations. [Describe the most significant actual
+build/runtime issue, diagnosis, and resolution.] The logging interface takes
+save settings through ROS parameters, and the plotter must distinguish the
+four-component quaternion state from its three-component orientation error.
+This experiment uses simulated feature coordinates and ground-truth inertial
+initialization, so it does not evaluate image tracking or cold-start
+initialization. The modern code revision, selected udel_gore trajectory,
+calibration/noise settings, and random seeds may differ from the historical
+experiment. [State actual mismatch, divergence, omitted runs, or unavailable
+metrics and justify why.] I therefore interpret the results as [the level of
+reproduction supported by your evidence]. A useful next step is [one specific
+improvement supported by your implementation experience].
+
+APPENDIX CAPTIONS - place outside the one-page report
+
+A. Reproduction of paper Figure 3: [scenario], seed [seed], [duration] seconds.
+Blue curves show [orientation and position errors]; red dashed curves show
+positive and negative marginal three-sigma bounds. [Explain measured behavior
+and any discrepancy, citing metrics.json and exact configuration.]
+
+B. Reproduction of paper Figure 4: [scenario], seed [seed], first ten seconds
+from the first logged estimate. Error is estimated minus true camera-IMU
+time offset, in seconds. [Explain convergence, residual error, bounds, and
+any discrepancy. If calibration is disabled, state that uncertainty is not
+estimated and do not interpret zero uncertainty fields as confidence.]

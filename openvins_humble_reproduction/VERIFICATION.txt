@@ -1,0 +1,23 @@
+Preparation verification - 12 November 2026
+
+Passed:
+- Python syntax compilation for both scripts.
+- Bash syntax validation for setup_humble.sh.
+- CLI help checks.
+- Analytical orientation/position/time-offset errors and RMSE using synthetic
+  software-test fixtures with known answers.
+- Quaternion sign invariance and an independent noncommuting JPL rotation check.
+- Rejection of mismatched log timestamps.
+- Correct handling of calibration-disabled time-offset uncertainty.
+- Configuration generation for all four calibration scenarios against the
+  inspected upstream estimator configuration.
+- Visual inspection of plot layout using synthetic software-test fixtures.
+
+Not executed or verified:
+- Ubuntu dependency installation or colcon compilation.
+- ROS 2 node execution or DDS behavior.
+- Actual OpenVINS simulations, convergence, runtime, or reproduced paper curves.
+- The paper's Table I/II/III ATE, RPE, or NEES benchmarks.
+
+No synthetic software-test plots or numeric fixtures are shipped as results.
+Run the experiments on a real ROS 2 Humble installation and retain the logs.
